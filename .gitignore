@@ -1,0 +1,36 @@
+# Binaries
+/app
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Output of go build
+/build
+/dist
+
+# Go cache & modules
+/go.sum
+/vendor/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment config
+.env
+.env.*
+
+# Air (hot reload tool)
+.air.toml
+tmp/
