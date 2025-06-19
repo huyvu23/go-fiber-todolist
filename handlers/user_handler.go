@@ -13,6 +13,7 @@ func GetUsers(c *fiber.Ctx) error {
 
 func CreateUser(c *fiber.Ctx) error {
 	var user models.User
+	// Tại sao dùng &user => Vì BodyParser cần thay đổi giá trị của struct
 	if err := c.BodyParser(&user); err != nil {
 		return c.Status(400).JSON(fiber.Map{"error": "Invalid input"})
 	}
