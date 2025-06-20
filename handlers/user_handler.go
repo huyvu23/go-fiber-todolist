@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/huyvu/go-fiber-todolist/models"
 	"github.com/huyvu/go-fiber-todolist/services"
@@ -14,9 +16,18 @@ func GetUsers(c *fiber.Ctx) error {
 func CreateUser(c *fiber.Ctx) error {
 	var user models.User
 	// Tại sao dùng &user => Vì BodyParser cần thay đổi giá trị của struct
-	if err := c.BodyParser(&user); err != nil {
-		return c.Status(400).JSON(fiber.Map{"error": "Invalid input"})
+	// if err := c.BodyParser(&user); err != nil {
+	// 	return c.Status(400).JSON(fiber.Map{"error": "Invalid input"})
+	// } => đây là cách viết ngắn gọn của đoạn code bên dưới
+	var err error
+	err = c.BodyParser(&user) // => Gọi hàm parse JSON và gán lỗi (nếu có) vào biến
+	fmt.Println("err:", err)
+	if err != nil {
+		return c.Status(400).JSON(fiber.Map{
+			"error": "Invalid input",
+		})
 	}
+
 	newUser := services.CreateUser(user)
 	return c.Status(201).JSON(newUser)
 }
